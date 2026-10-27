@@ -16,9 +16,12 @@ builder.Services.AddDbContext<StudentDbContext>(options => options.UseNpgsql(con
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("GitHubPages", policy =>
+    options.AddPolicy("Frontend", policy =>
     {
-        policy.WithOrigins("https://cristyjhiehan.github.io")
+        policy.WithOrigins(
+                "https://cristyjhiehan.github.io",
+                "http://127.0.0.1:5500",
+                "http://localhost:5500")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -38,7 +41,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("GitHubPages");
+app.UseCors("Frontend");
 
 app.UseAuthorization();
 
